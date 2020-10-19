@@ -65,10 +65,12 @@ print("이름 % 입니다 " %)
 
 #포맷 코드
 
-print("성명 : %s" % name)
+#포맷 코드
+
+print("성명 : %s" % name) #문자열 포맷 코드
 print("학번 : %s" %str(no))
-print("학년 : %d"  %year)
-print("학점 : %c" %grade)
-print("평균 : %f" % average)
+print("학년 : %d"  %year)#정수형 포맷 코드
+print("학점 : %c" %grade) #한문자 포맷 코드
+print("평균 : %f" % average) # 실수형 포맷 코드 
 
 -----------------------
