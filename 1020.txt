@@ -118,3 +118,90 @@ print(crawling[19]) #19(20번째 글자) ~ 인덱스는 0부터 시작
 print(crawling[-1:]) # 마지막에서 끝까지 (마지막 문자)
 print(crawling[:-1]) # 처음부터 마지막 -1 까지
 print(crawling[16:16+4]) # 16 ~ 19
+
+parsing[5] = '가' #문자열 인덱싱에는 대입연산자를 사용할 수 없다 .
+
+------------------------
+#문자열 연산자 in / not in 연산자
+#특정 문자열이 포함되어 있는지 여부 확인
+#결과 T/F
+#대소문자는 구별해서 찾는다.
+string = 'python programing'
+
+print('python' in string)
+print('Python' in string)
+
+
+if 'python' in string :
+    print('있음')
+else : 
+    print('없음')
+--------------------------
+문자열 관련 메소드(함수)
+len() # 문자열 전체 길이 반환
+count() #문자열 내에 들어있는 특정 문자(열)의 개수 반환, 문자열 또는 변수.
+find()
+index()
+split : 구문자를 기준으로 문자열을 나누고 리스트 형태로 반환
+구분자 : 기본 공백, 옵션으로 구분자를 지정할 수 있음. - / , . 
+replace() : 전체문자열에서 특정 문자열을 찾아 다른 문자열로 변경
+join() : 각 문자사이에 특정 문자(열) 삽입
+upper() : 전부 대문자로
+lower() : 전부 소문자로
+capitalize() : 문자의 첫 번째 문자를 대문자로 
+title() : 각 단어의 첫 글자를 대문자로 변경
+-------------------------
+#split : 구문자를 기준으로 문자열을 나누고 리스트 형태로 반환
+#구분자 : 기본 공백, 옵션으로 구분자를 지정할 수 있음. - / , . 
+string = 'python programming'
+split_str = string.split()
+print(split_str) # 결과는 리스트 형태로 반환
+names  ='홍길동,이몽룡,성춘향,변학도'
+names_split = names.split(",")
+print(names_split)
+
+colors = 'red:blue:yellow:green'
+colors_split = colors.split(":")
+print(colors_split)
+----------------------------------
+#replace() : 전체문자열에서 특정 문자열을 찾아 다른 문자열로 변경
+#문자열.replace(찾는문자열,변경할 문자열)
+course = 'Java programing'
+
+#Java 를 Python 으로 변경
+course_replace = course.replace("Java", "Python")
+print(course_replace)
+# 기존 course 변수의 값은 변경되는가 ? (f)
+print(course)
+--------------------------------
+#join() : 각 문자사이에 특정 문자(열) 삽입
+a = 'aa'
+a.join('bbb')# a 변수의 값을 bbb 사이에 삽입
+# 문자열 사이에 구분자 삽입 사용
+# 리스트에 있는 모든 문자를 하나로 구성할때 사용(리스트 함수)
+a = '-'
+print(a.join('abcd'))
+
+#리스트에 join 함수 사용
+sep = '-'
+names = ['홍길동', '이몽룡', '성춘향', '변학도']
+print(sep.join(names))
+---------------------------------
+#대소문자 전환 함수
+#upper() : 전부 대문자로
+#lower() : 전부 소문자로
+#captialize() : 문자의 첫 번째 문자를 대문자로 
+#title() : 각 단어의 첫 글자를 대문자로 변경
+string = 'this is MY DOG'
+string.upper()
+string.lower()
+string.capitalize()
+string.title()
+------------------------------
+#isalpha() : 문자여부 결과 반환 (t/f)
+#isdigit() : 숫자여부 결과 반환
+#isspace() : 공백여부 결과 반환 (t/f)
+#isalnum() : 문자 또는 숫자여부 결과 반환
+
+---------------------------------
+
