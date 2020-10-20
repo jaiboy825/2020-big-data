@@ -93,3 +93,28 @@ for x in range(0, 10, 2) :
 
 for x in range(11 , 22) :
     print(x, end= " ")
+
+------------------
+#1부터 10까지 합을 출력
+sumx = 0;
+for num in range(1, 11) :
+    sumx += num
+print(sumx)
+------------------
+문자열 인덱스 (indexing)
+인덱스로 문자의 위치를 나타내는 것
+인덱스 (첨자) : 문자의 위치, 0부터 시작
+string[0] : 인덱스의 0번째 문자
+
+---------------------
+슬라이싱 (slicing)
+문자열 중에서 일부분을 추출하는 것
+인덱스 사용
+print(crawling) 
+print(crawling[0:4]) #0~3
+print(crawling[5:16]) #5~15
+print(crawling[17:]) #17~끝
+print(crawling[19]) #19(20번째 글자) ~ 인덱스는 0부터 시작
+print(crawling[-1:]) # 마지막에서 끝까지 (마지막 문자)
+print(crawling[:-1]) # 처음부터 마지막 -1 까지
+print(crawling[16:16+4]) # 16 ~ 19
