@@ -1,0 +1,66 @@
+if 문 
+조건식이 참이면 주어진 문장 수행
+조건식이 거짓이면 아무것도 수행하지 않음
+---------
+if ~ else 문
+조건식이 참이면 if 문 수행
+조건식이 거짓이면 else 문 수행
+if 조건식 :
+else : 
+
+---------
+#로그인 프로그램
+id = 'flower'
+password = '1234'
+
+#사용자로부터 키보드를 통해 값을 입력 받기
+input_id = input("아이디 입력 : ") #입력되는 data는 문자열로 처리
+input_pass = input("비밀번호 입력")
+
+#두 값이 모두 일치하면 로그인 성공
+if (id == input_id )and( password == input_pass) :
+    print('로그인 성공')
+else :
+    print('로그인 실패')
+----------------
+password = 1234
+
+if password == 12341 : 
+    print('비밀번호 일치')
+else : 
+    pass #아무것도 수행하지 않을 경우 
+--------------------
+#사용자로부터 두 수를 입력받아 더한 결과를 출력하는 코드 작성
+ su1 = int(input('첫번째 수 입력 : '))
+su2 = int(input('두번째 수 입력 : '))
+
+print(su1 + su2)
+
+------------
+또 다른 조건이 있을 때 elif 사용
+if (조건식 1) :
+   1이 참
+elif (조건식 2) : 
+   2이 참
+else :
+  아무것도 아닐경우
+------------------
+#if~elif~else
+num = int(input('정수 입력'))
+
+if num < 0 :
+    print('음수')
+elif num > 0 :
+    print('양수')
+else :
+    print('0')
+    
+---------------------
+
+#정수 3개를 입력 받아서 제일 큰 수 출력
+f = int(input('첫번째 수 : '))
+s = int(input('두번째 수 : '))
+t = int(input('세번째 수 : '))
+array = [f, s , t]
+maxNum = max(array)
+print(maxNum)
