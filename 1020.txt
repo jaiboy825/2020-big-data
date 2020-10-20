@@ -205,3 +205,25 @@ string.title()
 
 ---------------------------------
 
+#사용자로부터 문장을 입력 받는다
+
+string = input("문장을 입력하세요.")
+al = 0
+di = 0
+sp = 0
+aln = 0
+
+for i in string :
+    if i.isalpha() :
+        al+= 1
+    elif i.isdigit() :
+        di+= 1
+    elif i.isspace() :
+        sp += 1
+    else :
+        aln += 1
+print("알파벳 : " + str(al))
+print("숫자 : " + str(di))
+print("스페이스 : " + str(sp))
+print("기타 : " + str(aln))
+
