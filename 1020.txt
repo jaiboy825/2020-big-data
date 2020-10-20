@@ -64,3 +64,32 @@ t = int(input('세번째 수 : '))
 array = [f, s , t]
 maxNum = max(array)
 print(maxNum)
+
+-----------------
+for 문 
+정해진 횟수만큼 반복
+
+for name in ["홍길동", "이몽룡", "성춘향", "변학도" ] :
+    print(name)
+for i in range(0, 10):
+    print(i)
+
+------------
+range() 함수 
+특정 범위의 정수 생성
+
+range(start, stop)
+start 에서 stop-1까지의 정수
+
+range(start, stop, step)
+start 에서 stop-1까지의 정수를 step 씩 
+for x in range(0, 10, 2) :
+    print(x)
+
+
+-------------
+#숫자 11부터 21까지를 한줄에 출력하시오 .
+#단, 한칸 띄어서 출력 할 것
+
+for x in range(11 , 22) :
+    print(x, end= " ")
