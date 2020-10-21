@@ -56,4 +56,26 @@ CCTV_seoul.rename(columns={CCTV_seoul.columns[0]:'구별'})
 CCTV_seoul.rename(columns={CCTV_seoul.columns[0]:'구별'}, inplace = True)
 CCTV_seoul.head()
 
-pop_Seoul = pd.read_excel('../data/01. population_in_Seoul.xls', encoding='utf-8')
+pop_Seoul = pd.read_excel('../data/01. population_in_Seoul.xls', 
+                        header = 2, #두 행 skip,
+                        usecols = 'B,D,G,J,N', #선택 열만 가져오기
+                        encoding='utf-8')
+pop_Seoul.head()  
+
+컬럼명 변경 => 0:구별 1:인구수 2:한국인 3:외국인 4:고령자
+
+pop_Seoul.rename(columns ={pop_Seoul.columns[0]:'구별',
+                           pop_Seoul.columns[1]:'인구수',
+                           pop_Seoul.columns[2]:'한국인',
+                           pop_Seoul.columns[3]:'외국인',
+                           pop_Seoul.columns[4]:'고령자'}, inplace=True)
+pop_Seoul.head()
+
+# CCTV 데이터 파악하기
+설치대 대수가 작은 5개 구는 어디인가? - 소계가 총 설치대수 이므로 소계를 기준으로 sort한다.
+정렬 함수 sort_values(by='기준열이름', ascending=True) : 오름차순 정렬
+CCTV_seoul.sort_values(by='소계',ascending=True).head()
+
+# CCTV 대수가 많은 5개 구는 어디인가?
+# 소계를 기준으로 내림차순 정렬
+CCTV_seoul.sort_values(by='소계',ascending=False).head()
