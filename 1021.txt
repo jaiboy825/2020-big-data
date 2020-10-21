@@ -92,6 +92,18 @@ for key in naver.keys():
 for value in naver.values() :
     print(value)
 
+#key로 value 찾기 
+print(naver["userId"])
+print(naver.get("password")) # get 함수를 이용해서 value 찾기
+
+# print(naver["link"]) #키가 없으므로 에러 발생
+print(naver.get('link')) #키가 없으면 None
+print(naver.get('link', '없음')) #없음 출력
+
+#키에 대응하는 값의 존재여부만 확인 : in / not in
+print('link' in naver)
+print('link' not in naver)
+
 ----------------------------------------------
 
 ----------------------------------------------
