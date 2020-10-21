@@ -1,0 +1,59 @@
+1. 서울시 각 구별 cctv 수를 파악하고 인구대비 cctv 비율을 구해 순위 비교 
+2. 인구대비 cctv 평균치를 확인하고 cctv가 과하게 부족한 구를 확인
+3. 고령자 대비 cctv 수 확인
+4. 외국인 대비 cctv 수 확인
+
+- 필요한 데이터
+- 서울시 지자체별 cctv 현황 data
+- 서울시 지자체별 인구 현황 data
+
+교재 23쪽
+---------------------------------------------------------------------
+
+# 데이터 분석을 위해서는 반드시 패키지를 import 해야 함
+# pandas(데이터 분석), numpy(수치분석) 패키지
+# 패키지는 관련 함수 모임
+# import 패키지명 -- 패키지명이 길 경우 별명을 생성해서 쓸 수 있다.
+# import 패키지명 as 별명
+
+import pandas as pd
+import numpy as np
+
+# 데이터 파일 읽어오기
+# 01. CCTV_in_Seoul.csv (파일명은 다르면 안된다. 띄어쓰기 주의 할 것)
+# 한글 포함여부에 따라 옵션이 달라진다.
+# 한글 포함 시 encoding 방식을 지정해 줘야 함
+# utf-8 방식이  있고 : utf-8
+# euc-kr 방식 있음 : ansi 방식
+
+# 외부 파일 읽어올 때 경로가 중요(상대 경로 사용이 원칙)
+# 사용 data는 내문서\data\
+# 코드 파일은 내문서\1021\코드
+# '../data/01. CCTV_in_Seoul.csv'
+CCTV_seoul = pd.read_csv('../data/01. CCTV_in_Seoul.csv', encoding='utf-8')
+# 데이터 확인하기 위해서 위 5중 출력
+CCTV_seoul.head() # 데이터프레임형태로 출력
+
+# head() 함수 : 데이터프레임의 데이터를 위에서부터 지정된 숫자 만큼 출력
+CCTV_seoul.head() # 5줄 출력
+CCTV_seoul.head(5) # 매개변수로 전달된 숫자만큼 출력
+CCTV_seoul.tail() # 마지막 5줄 출력(반환)
+CCTV_seoul.tail(10) # 마지막 10줄 출력(반환)
+
+# read_csv() 함수는 csv 파일을 읽어와서 데이터프레임 형태로 저장
+# 데이터 프레임은 세로 데이터의 제목인 컬럼명이 있고
+# 가로 데이터를 구분하는 인덱스를 갖고 있다.
+
+# 데이터프레임의 컬럼명으로 컬럼을 접근하기 때문에 의미있는 컬럼명으로 사용
+# 컬럼명만 출력
+CCTV_seoul.columns
+
+# 컬럼명을 의미있게 변경
+# rename 함수 사용 : df.rename(columns={바꿀위치:새로운이름값})
+# 기관명 -> 구별
+CCTV_seoul.rename(columns={CCTV_seoul.columns[0]:'구별'})
+# rename 함수는 원본을 변경하지 않는다. 옵션 inplace = False 로 되어 있기 때문에
+CCTV_seoul.rename(columns={CCTV_seoul.columns[0]:'구별'}, inplace = True)
+CCTV_seoul.head()
+
+pop_Seoul = pd.read_excel('../data/01. population_in_Seoul.xls', encoding='utf-8')
