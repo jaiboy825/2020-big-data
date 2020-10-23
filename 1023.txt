@@ -126,3 +126,53 @@ plt.ylabel('CCTV')
 plt.colorbar(label='오차')
 plt.grid()
 plt.show()
+
+----------------------------------------------------------------------------------------------------------------------
+-------------------------------------------범죄----------------------------------------------------------------------
+# 강남 3구는 체감만큼 안전한가 ?
+- 사용 데이터 : 서울시 관서별 범죄 발생 검거율 현황 
+- 서울시 공공데이터에서 수집이 가능(매년 형식이 약간씩 변경됨)
+- 범죄(5대 범죄) - 살인, 강도, 강간, 절도, 폭력
+- 관서별 : 경찰서별
+    
+-구글 지도 데이터를 이용해서 경찰서 주소 얻어오는 방법
+
+
+# 필수 패키지 import 및 data 가져오기
+import pandas as pd
+import numpy as np
+
+
+#주피터 노트북에서 출력 모두를 표시하는 코드
+# a
+# b
+# b 변수만 출력
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity="all"
+
+# data 가져오기 
+crime_anal_police = pd.read_csv('../data/02. crime_in_Seoul.csv', encoding='euc_kr')
+crime_anal_police.head()
+type(crime_anal_police['폭력 검거'][0]) #천단위 구분기호가 있어서 문자열로 읽어옴
+------------- 천단위 구분기호 없앰 -----------------
+crime_anal_police = pd.read_csv('../data/02. crime_in_Seoul.csv',thousands = ',' ,encoding='euc_kr')
+crime_anal_police.head()
+type(crime_anal_police['폭력 검거'][0]) #천단위 구분기호가 있어서 문자열로 읽어옴
+
+#데이터가 경찰서별로 되어 있음. -> 구별로 데이터로 변경
+#경찰서 명을 이용해서 경찰서 주소를 구글로부터 얻어오는 작업을 진행
+#구글 맵을 사용하기 위한 패키지를 설치
+#아나콘다 명령행을 이용해서 아래 명령 실행
+# pip install googlemaps - anaconda cmd 에서 설치
+
+import googlemaps
+
+
+
+gmapsKey = 'AIzaSyB-xZ-IKxYvd7GrvISS0M2GHZFkvukiSrI' # key 등록
+gmaps = googlemaps.Client(key = gmapsKey)
+gmaps 
+
+#서울 중부 경찰서의 정보 구글로부터 얻어오기 
+tmp = gmaps.geocode('서울중부경찰서', language = 'ko')
+tmp
