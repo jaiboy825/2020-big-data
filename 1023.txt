@@ -69,3 +69,38 @@ fx
 f1 = np.poly1d(fp1) #f1은 방정식을 수행할 수 있는 함수가 생성되어 있음
 #f1은 함수로 생성됨 : f1(x값)으로 사용 y 값 이 나옴
 f1(fx)
+
+#인구수 대비 cctv 대수 분산그래프를 그리고 대표 직선 그리기 
+#대표 직선을 위한 data는 x값(인구수) : fx 변수 y값(cctv) : f1(fx)
+plt.figure(figsize=(6,6))
+plt.scatter(data_result['인구수'], data_result['소계'], s = 50)
+#대표 직선 그래프 그리기 
+plt.plot(fx, f1(fx), ls='dashed',lw=3, color='g')
+#ls 는 선스타일 lw는 선 두께, color 선 색상 
+plt.xlabel('인구수')
+plt.ylabel('CCTV')
+plt.grid()
+plt.show()
+
+위 그래프의 직선의 의미는 400000일때 적정 cctv 대수는 1200대 정도여야 적정-
+직선보다 위쪽은 일반보다 많은 지역
+직선보다 아래쪽은 일반보다 적게 설치된 지역
+
+# 조금 더 설득력 있는 자료 만들기 
+- 직선에서 멀어질수록 마커의 색상을 다르게 표현
+- 직선과 멀리 있는 상위 10개를 선택해서 구 이름을 표시 
+
+# 각 구별 적절한 cctv 대수를 계산해보자 
+f1(data_result['인구수'])
+
+#구별 인구수 대비 cctv 오차 계사(있어야 할 대수보다 얼마나 많고 적은지를 계산)
+
+data_result['소계']-f1(data_result['인구수'])
+#강남구등을 더 많이 설치
+
+
+# 위에서 계산한 오차를 절대값으로 변환 후 상위 10 개 구 확인
+# abs(값) : 절대값 반환
+data_result['오차'] = np.abs(data_result['소계']-f1(data_result['인구수']))
+
+data_result.head()
