@@ -31,13 +31,13 @@ a,b = b,a #동적 할당을 하기 때문에
 print(a, b)
 
 #### 변수 삭제 
-#del 명령어 사용
+del 명령어 사용
 #del 변수 
 del a #a 변수 삭제
 print(a)
 
 #### 문자열 사용 
-#문자열에 큰 따옴표 사용
+문자열에 큰 따옴표 사용
 name = "홍길동"
 age = 23
 print(name, age)
@@ -53,13 +53,18 @@ __문자열에 + 연산자를 사용하면 문자열 결합 연산자로 취급_
   str(str)
 
 
-name, no, year, grade, average = "홍길동", 2016001, 4, "A", 93.5
+  name, no, year, grade, average = "홍길동", 2016001, 4, "A", 93.5
 
-print("성명 : " + name)
-print("학번 : " + str(no))
-print("학년 : " + str(year))
-print("학점 : " + grade)
-print("평균 : " + str(average))
+  print("성명 : " + name)
+  
+  print("학번 : " + str(no))
+
+  print("학년 : " + str(year))
+
+  print("학점 : " + grade)
+
+  print("평균 : " + str(average))
+
 
 #### 포맷 코드 사용
   print("이름 % 입니다 " %)
@@ -67,7 +72,12 @@ print("평균 : " + str(average))
 #### 포맷 코드
 
   print("성명 : %s" % name) #문자열 포맷 코드
+  
   print("학번 : %s" %str(no))
+  
   print("학년 : %d"  %year)#정수형 포맷 코드
+  
   print("학점 : %c" %grade) #한문자 포맷 코드
+  
   print("평균 : %f" % average) # 실수형 포맷 코드 
+  
