@@ -43,8 +43,8 @@ age = 23
 print(name, age)
 
 #### 작은 따옴표도 사용 가능
-address = '서울시 강남구'
-print(address)
+```address = '서울시 강남구'
+print(address)```
 
 __문자열에 + 연산자를 사용하면 문자열 결합 연산자로 취급__
   ```print(name + "은 " + address + "에 삽니다");```
