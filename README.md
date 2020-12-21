@@ -47,10 +47,10 @@ address = '서울시 강남구'
 print(address)
 
 __문자열에 + 연산자를 사용하면 문자열 결합 연산자로 취급__
-  '''print(name + "은 " + address + "에 삽니다");'''
+  ```print(name + "은 " + address + "에 삽니다");```
 
 숫자를 문자열과 연결하기 위해서는 숫자를 문자열 타입으로 형변환을 해야한다 
-  '''
+  ```
   str(str)
   name, no, year, grade, average = "홍길동", 2016001, 4, "A", 93.5
   print("성명 : " + name)
@@ -58,16 +58,16 @@ __문자열에 + 연산자를 사용하면 문자열 결합 연산자로 취급_
   print("학년 : " + str(year))
   print("학점 : " + grade)
   print("평균 : " + str(average))
-'''
+```
 
 #### 포맷 코드 사용
-  '''print("이름 % 입니다 " %)'''
+  ```print("이름 % 입니다 " %)```
 
 #### 포맷 코드
-'''
+```
   print("성명 : %s" % name) #문자열 포맷 코드  
   print("학번 : %s" %str(no))  
   print("학년 : %d"  %year)#정수형 포맷 코드  
   print("학점 : %c" %grade) #한문자 포맷 코드  
   print("평균 : %f" % average) # 실수형 포맷 코드 
-'''  
+```
