@@ -502,8 +502,8 @@ pop_Seoul.drop([0], inplace=True) # 합계행(0행) 삭제
 pop_Seoul.drop([0],axsis = 0, inplace=True) # 합계행(0행) 삭제
 pop_Seoul.head()
 ```
-- - 각 구가 모두 데이터로 있는지 확인 작업
-- 1. 구가 중복되어 있는지 (두번 이상 나타나면 안됨)
+- 각 구가 모두 데이터로 있는지 확인 작업
+- 구가 중복되어 있는지 (두번 이상 나타나면 안됨)
 - 전체 행 개수를 확인
 - 중복 데이터를 제거한 후 행개수를 확인
 
@@ -531,4 +531,131 @@ pop_Seoul.drop([26], inplace=True) # 한번 제거 후 주석처리 해서 다�
 ```
 pop_Seoul.tail()
 len(pop_Seoul)
+```
+###### 인구수 대비 외국인과 고령자 비율 계산
+```
+pop_Seoul['외국인비율']=pop_Seoul['외국인']/pop_Seoul['인구수']*100
+pop_Seoul['고령자비율']=pop_Seoul['고령자']/pop_Seoul['인구수']*100
+```
+###### 가공데이터 확인
+```
+pop_Seoul.head()
+pop_Seoul.tail()
+```
+
+1. 어느구의 인구가 가장 많은가? 인구가 많은 5개 구 출력
+2. 외국인이 많은 5개 구를 출력
+3. 인구수 대비 외국인이 많은 5개 구를 출력
+4. 고령자가 많은 5개 구를 출력
+5. 인구수 대비 고령자가 많은 5개 구를 출력
+
+```
+pop_Seoul.sort_values(by='인구수', ascending=False).head(5)
+pop_Seoul.sort_values(by='외국인', ascending=False).head(5)
+pop_Seoul.sort_values(by='외국인비율', ascending=False).head(5)
+pop_Seoul.sort_values(by='고령자', ascending=False).head(5)
+pop_Seoul.sort_values(by='고령자비율', ascending=False).head(5)
+```
+
+cctv 데이터 가공필드 와 인구 데이터 가공필드 완성, 인구대비 cctv 수의 적정성확인하기 위해 두 변수를 병합해서 분석해야 함.
+
+###### 두 변수 병합하기 위해서는 병합 위한 키를 찾기 : 공통필드
+
+###### CCTV_Seoul 과 pop_Seoul 병합코드
+- 공통 컬럼이 '구별' 컬럼으로 조인
+- 양쪽 모두 25개의 구로 이루어져있다.
+- merge 함수
+- pd.merge(조인할 df1, 조인할 df2, on='공통필드')
+```
+data_result = pd.merge(CCTV_seoul, pop_Seoul, on='구별')
+data_result.head()
+```
+사용하지 않을 컬럼을 삭제 
+- CCTV의 소계와 최근 증가율을 제외한 연도 관련 data는 삭제
+
+###### 그래프 그릴때 축 데이터를 쉽게 지정하기 위해서 행 인덱스를 구별로 변경
+- 행인덱스 지정 함수 set_index('지정한 이름', inplace=True)
+```
+data_result.set_index('구별', inplace=True)
+data_result.head()
+```
+다수의 데이터 중 상관관계가 가장 큰 데이터를 비교
+
+인구와 관련된 각 필드와 CCTV 소계와의 상관 계수를 파악한 후 의미 있는 그래프 표현
+
+###### 상관계수 : 두 변수의 관련성을 확인 하는 방법중의 하나
+   - 절대값이 클수록 두 데이터는 관련이 있다고 봄
+   - 절대값을 기준으로 0.1 이해 무시
+   - 0.3 이하 약한 상관 관계
+   - 0.7 이상 강한 상관 관계
+    
+상관 관계 파악 변수(컬럼)
+- cctv 총대수와 인구수
+- cctv 총대수와 고령자비율
+- cctv 총대수와 외국인비율
+
+계산 함수 numpy 패키지 corrcoef(데이터1, 데이터2)
+
+###### CCTV 총대수와 인구수 상관관계 확인
+```
+np.corrcoef(data_result['소계'],data_result['인구수'])
+```
+###### CCTV 총대수와 고령자 비율 상관관게 확인
+```
+np.corrcoef(data_result['소계'],data_result['고령자비율'])
+//약한 음의 상관관계
+```
+###### CCTV 총대수와 외국인 비율 상관관계 확인
+```
+np.corrcoef(data_result['소계'],data_result['외국인비율'])
+```
+
+###### 파이썬의 그래프 그리는 모듈(패키지) : matplotlib.pyplot
+###### 서브패키지 pyplot 이용
+```
+import matplotlib.pyplot as plt
+```
+- 그래프는 새창이 뜨면서 드로잉을 하는데
+- 새창 띄우지 말고 소스코드 안에서 드로잉 하라는 명령
+```
+%matplotlib inline
+```
+###### 한글문제 발생
+- matplotlib의 기본폰트에서 한글지원 폰트가 없음
+- 패키지의 폰트를 추가하고 사용
+- 윈도우 용
+```
+import platform
+
+from matplotlib import font_manager, rc
+plt.rcParams['axes.unicode_minus'] = False
+
+if platform.system() == 'Darwin':  # 맥OS 
+    rc('font', family='AppleGothic')
+elif platform.system() == 'Windows':  # 윈도우
+    path = "c:/Windows/Fonts/malgun.ttf"
+    font_name = font_manager.FontProperties(fname=path).get_name()
+    rc('font', family=font_name)
+else:
+    print('Unknown system...  sorry~~~')
+```
+
+###### 구별 cctv 설치대수를 그래프로 표현
+- 수평 막대 그래프
+- 전체 그림 크기(그림 영역 설정 plt.figure(figsize=(10,10)))
+```
+plt.figure(figsize=(10,10))
+#그래프 그림 plot(kind = 그래프 종류값, grid=T/F(격자무늬 설정))
+data_result['소계'].plot(kind = 'barh', grid= True)
+plt.show()
+```
+###### 구별 cctv  설치대수 그래프
+- 수평막대 그래프 정렬해서 그래프 출력
+```
+s = data_result['소계'].sort_values()
+plt.figure(figsize=(10,10))
+plt.barh(s.index, s)
+plt.grid()
+plt.show()
+s # 시리즈로 반환 - 인덱스가 존재
 ```
