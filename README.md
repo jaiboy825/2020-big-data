@@ -472,3 +472,63 @@ print(naver.get('link', '없음')) #없음 출력
 print('link' in naver)
 print('link' not in naver)
 ```
+
+## 10월 22일
+###### CCTV 최근 증가율 계산
+데이터프레임에 컬럼을 추가할 때는 df명 ['새로 추가될 컬럼명'] = 값들
+```
+CCTV_seoul['최근증가율'] = (CCTV_seoul['2014년'] + CCTV_seoul['2015년'] + CCTV_seoul['2016년']) / CCTV_seoul['2013년도 이전'] * 100
+```
+
+###### 3개년간 CCTV 설치 증가율이 높은 5개 구를 출력
+```
+CCTV_seoul.sort_values(by='최근증가율', ascending=False).head(5)
+```
+
+###### 서울시 인구데이터 파악하기 : 사용변수 pop_Seoul
+```
+pop_Seoul.head()
+```
+- 첫 행 합계는 계산 행 이므로 삭제
+- 삭제 함수 : del 명령어 , drop() 함수
+- 행 삭제 : drop() 함수
+- 열 삭제 : del 명령어
+
+
+```
+pop_Seoul.drop(0).head() #합계행(0행) 삭제
+pop_Seoul.head() #원본 반영 안됨
+pop_Seoul.drop([0], inplace=True) # 합계행(0행) 삭제
+pop_Seoul.drop([0],axsis = 0, inplace=True) # 합계행(0행) 삭제
+pop_Seoul.head()
+```
+- - 각 구가 모두 데이터로 있는지 확인 작업
+- 1. 구가 중복되어 있는지 (두번 이상 나타나면 안됨)
+- 전체 행 개수를 확인
+- 중복 데이터를 제거한 후 행개수를 확인
+
+- 전체 행 개수 확인 : dataframe 의 행 개수 확인 함수 (len())
+- 서울시 구는 25개 구  
+
+###### 중복된 데이터는 제거하고 출력하는 함수(unique()) 
+pop_Seoul['구별'].unique()
+
+- 구별 데이터에 nan 데이터가 들어있음 : nan = null -> 삭제 필요
+- nan에 해당하는 행 전체를 삭제 : 구별값이 nan인 행의 인덱스 확인
+- nan을 확인하는 함수 df명[필드명].isnull()
+- 해당 행을 출력해서 확인
+
+```
+pop_Seoul['구별'].isnull()
+pop_Seoul[pop_Seoul['구별'].isnull()]
+// pop_Seoul의 26행에 nan값이 저장되어 있으므로 제거 후 제거 되었는지 확인
+// 데이터프레임명[필드명 또는 조건식] : 데이터 행에 접근
+```
+pop_Seoul의 26행에 nan값이 저장되어 있으므로 제거 후 제거 되었는지 확인 
+
+pop_Seoul.drop([26], inplace=True) # 한번 제거 후 주석처리 해서 다시 실행 되지 않도록 한다
+- 제거 확인
+```
+pop_Seoul.tail()
+len(pop_Seoul)
+```
